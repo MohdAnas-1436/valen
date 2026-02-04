@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0); /* Romantic Gradient */
+            font-family: 'Comic Sans MS', 'cursive', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+            z-index: 10;
+            border: 4px dashed #ff4d6d;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px #ffc1e3;
+        }
+
+        .kawaii-cat {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-top: 40px;
+            height: 60px; /* Keeps layout stable */
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        /* Swapped: Yes is now on the left */
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #noBtn {
+            background-color: #757575;
+            color: white;
+            position: relative;
+        }
+
+        .i-love-you-text {
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Floating background hearts */
+        .heart {
+            position: absolute;
+            color: white;
+            pointer-events: none;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="main-content">
+            <img class="kawaii-cat" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZqZndueHozZndueHozZndueHozZndueHozZndueHozZndueCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Asking Cat">
+            <h1>Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">Yes!</button>
+                <button id="noBtn" onmouseover="moveButton()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            // Move it far enough that it's hard to catch
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            const content = document.getElementById('main-content');
+            content.innerHTML = `
+                <img class="kawaii-cat" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZpZzBqZndueHozZndueHozZndueHozZndueHozZndueHozZndueCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Happy Cat">
+                <h1>I knew you'd say yes! 🥰</h1>
+                <span class="i-love-you-text">I LOVE YOU!</span>
+            `;
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
